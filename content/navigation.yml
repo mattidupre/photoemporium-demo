@@ -1,0 +1,49 @@
+items:
+  - type: fixed
+    title: Photo Booths
+    color: red
+    target: booths
+    children:
+      - type: booth
+        target: bellows
+        title: Bellows Booth
+      - type: booth
+        target: retro
+        title: Retro Booth
+      - type: booth
+        title: Selfie Booth
+        target: selfie
+      - type: booth
+        title: Headshot Booth
+        target: headshot
+      - type: booth
+        title: Slo Mo Booth
+        target: slomo
+      - type: booth
+        title: Red Carpet Photo
+        target: redcarpet
+      - type: booth
+        title: Vogue Booth
+        target: vogue
+  - type: booth
+    title: Hank the Moose
+    color: yellow
+    target: hankthemoose
+  - type: booth
+    title: Photo Bus
+    color: blue
+    target: photobus
+  - type: booth
+    title: Themed Booths
+    color: purple
+    target: themed
+  - type: placeholder
+    title: Info
+    color: red
+    children:
+      - type: fixed
+        target: backdrops
+        title: Backdrops
+      - type: page
+        target: weddings
+        title: Weddings

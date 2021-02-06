@@ -1,0 +1,58 @@
+intro: >-
+  Go ahead ask away. Keep Calm and Question On. There are no such thing as
+  stupid questions.
+
+
+  “It is not only by the questions we have answered that progress may be measured, but also by those we are still asking.’ Freda Adlers.
+
+
+  “Question Everything!” Albert Einstein
+questions:
+  - name: What is a photo emporium?
+    description: A backdrop, a box of the coolest props imaginable and a very clever
+      photo taking machine – choose between Vintage, Chic White or Video Slo-Mo.
+  - name: Do the images print instantly?
+    description: You betcha. It's like Magic - printing in only 10 seconds.
+  - name: How many people can you fit in these emporiums?
+    description: All of them. We don't limit your creativity. Fifteen is a good
+      number. I dare you to get 30.
+  - name: Can we customize the prints?
+    description: Absolutely. Whatcha want? A watermark? A kiss?
+  - name: Who takes the photos?
+    description: You control it. With a little touchscreen you have the power, my he-man.
+  - name: Can we have our photos uploaded to facebook?
+    description: You sure want to be posted in that photo?! With a simple click, you
+      can share your photographs online.
+  - name: Will I be the talk of the town?
+    description: No doubt.
+features:
+  - name: "Custom Theming\t"
+    us: "Yes! Fit your style anywhere.\t"
+    them: "No: Well, they can put your name in B/W."
+  - name: "Fits 15 people\t"
+    us: "Yes! Sometimes More\t"
+    them: "No: Good luck squeezing more than 3"
+  - name: "Digital Files\t"
+    us: Yes! Quick and Easy link, to share all the fun.
+    them: "No: CDs are so 2008"
+  - name: "Prop Kit\t"
+    us: "Yes! Always included & load of laughs to follow.\t"
+    them: "No: You will have to pay for that too."
+  - name: "All inclusive pricing\t"
+    us: "Yes! Get everything all the time\t"
+    them: "No: They start low but end up more expensive."
+  - name: "Open Air Style\t"
+    us: "Yes! Our Booth is inclusive; letting everyone see and experience the fun\t"
+    them: "No: Exclusive style. Fun for two but not for you."
+  - name: "Unlimited Prints\t"
+    us: "Yes! 2 or 20, everyone gets their own print\t"
+    them: "No: Only 2 copies, or you pay more"
+  - name: "Quick and Easy\t"
+    us: "Yes! We are photo booth ninjas, setting up in only 20 minutes.\t"
+    them: "No: 600lbs of equipment (I think that says it all)"
+  - name: "Boothie\t"
+    us: "Yes! We attend every event to make it flawless\t"
+    them: "No: Good luck if there is a problem, and there is always a problem."
+  - name: "Social Kiosk\t"
+    us: "Yes! Send it off to the internets.\t"
+    them: "No: 1995 called and wants their photobooth back"

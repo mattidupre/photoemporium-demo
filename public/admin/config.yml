@@ -2,140 +2,388 @@ backend:
   name: git-gateway
   branch: master
 
+local_backend: true # $npx netlify-cms-proxy-server
+
 media_folder: public/images
 public_folder: /images
+site_url: https://photoemporium-demo.netlify.app
+
+aliases:
+  link_title: &link_title
+    label: Title
+    name: title
+    widget: string
+  link_color: &link_color
+    label: Color
+    name: color
+    widget: select
+    options:
+      - label: Red
+        value: red
+      - label: Yellow
+        value: yellow
+      - label: Blue
+        value: blue
+      - label: Purple
+        value: purple
+  link_fixed_target: &link_fixed_target
+    label: Fixed Page
+    name: target
+    widget: select
+    options:
+      - label: Booths
+        value: booths
+      - label: Blog
+        value: blog
+      - label: Backdrops
+        value: backdrops
+      - label: FAQ
+        value: faq
+      - label: Team
+        value: team
+  link_external_target: &link_external_target
+    label: URL
+    name: target
+    widget: string
+  link_page_target: &link_page_target
+    label: Page
+    name: target
+    widget: relation
+    collection: pages
+    search_fields: [name, slug]
+    value_field: slug
+  link_booth_target: &link_booth_target
+    label: Booth
+    name: target
+    widget: relation
+    collection: booths
+    search_fields: [name, slug]
+    value_field: slug
+  link_item_children: &link_item_children
+    label: Child Links
+    label_singular: Child Link
+    name: children
+    widget: list
+    types:
+      - label: Fixed Page Link
+        name: fixed
+        widget: object
+        fields:
+          - <<: *link_title
+          - <<: *link_fixed_target
+      - label: External Link
+        name: external
+        widget: object
+        fields:
+          - <<: *link_title
+          - <<: *link_external_target
+      - label: Custom Page Link
+        name: page
+        widget: object
+        fields:
+          - <<: *link_title
+          - <<: *link_page_target
+      - label: Booth Link
+        name: booth
+        widget: object
+        fields:
+          - <<: *link_title
+          - <<: *link_booth_target
 
 collections:
-  - name: "config"
-    label: "Config"
+  - name: settings
+    label: Site Settings
     delete: false
     editor:
       preview: false
     files:
-      - name: "general"
-        label: "Site Config"
-        file: "config.json"
-        description: "General site settings"
+      - name: navigation
+        label: Navigation
+        delete: false
+        file: "content/navigation.yml"
         fields:
-          - label: "URL"
-            name: "base_url"
-            widget: "string"
-            hint: "Do not enter the trailing slash of the URL"
-          - label: "Site title"
-            name: "site_title"
-            widget: "string"
-          - label: "Site description"
-            name: "site_description"
-            widget: "string"
-          - label: "Site keywords"
-            name: "site_keywords"
-            widget: "list"
-            summary: "{{fields.keyword.keyword}}"
-            field:
-              label: Keyword
-              name: keyword
-              widget: "string"
-          - label: "Twitter account"
-            name: "twitter_account"
-            widget: "string"
-          - label: "GitHub account"
-            name: "github_account"
-            widget: "string"
-
-  - name: "meta"
-    label: "Meta"
-    delete: false
-    editor:
-      preview: false
-    files:
-      - name: "authors"
-        label: "Authors"
-        file: "meta/authors.yml"
-        description: "Author descriptions"
-        fields:
-          - name: authors
-            label: Authors
-            label_singular: "Author"
+          - label: Items
+            name: items
             widget: list
-            fields:
-              - label: "Slug"
-                name: "slug"
-                widget: "string"
-                hint: "The part of a URL identifies the author"
-              - label: "Name"
-                name: "name"
-                widget: "string"
-                hint: "First and Last"
-              - label: "Introduction"
-                name: "introduction"
-                widget: "text"
-      - name: "tags"
-        label: "Tags"
-        file: "meta/tags.yml"
-        description: "List of tags"
-        fields:
-          - name: tags
-            label: Tags
-            label_singular: "Tag"
-            widget: list
-            fields:
-              - label: "Slug"
-                name: "slug"
-                widget: "string"
-                hint: "The part of a URL identifies the tag"
-              - label: "Display Name"
-                name: "name"
-                widget: "string"
-                hint: "Tag name for displaying on the site"
+            types:
+              - label: Placeholder
+                name: placeholder
+                widget: object
+                fields:
+                  - <<: *link_title
+                  - <<: *link_color
+                  - <<: *link_item_children
+              - label: Fixed Page Link
+                name: fixed
+                widget: object
+                fields:
+                  - <<: *link_title
+                  - <<: *link_color
+                  - <<: *link_fixed_target
+                  - <<: *link_item_children
+              - label: External Link
+                name: external
+                widget: object
+                fields:
+                  - <<: *link_title
+                  - <<: *link_color
+                  - <<: *link_external_target
+                  - <<: *link_item_children
+              - label: Custom Page Link
+                name: page
+                widget: object
+                fields:
+                  - <<: *link_title
+                  - <<: *link_color
+                  - <<: *link_page_target
+                  - <<: *link_item_children
+              - label: Booth Page Link
+                name: booth
+                widget: object
+                fields:
+                  - <<: *link_title
+                  - <<: *link_color
+                  - <<: *link_booth_target
+                  - <<: *link_item_children
 
-  - name: "posts"
-    label: "Posts"
-    folder: "src/pages/posts"
-    extension: "mdx"
-    format: "frontmatter"
-    create: true
+  - name: pages
+    label: Pages
+    label_singular: Page
     slug: "{{slug}}"
+    summary: "{{name}}"
     identifier_field: slug
-    summary: "{{title}}"
+    folder: "content/pages"
+    format: yml
+    create: true
+    editor:
+      preview: false
     fields:
-      - label: "Slug"
-        name: "slug"
-        widget: "string"
-      - label: "Title"
-        name: "title"
-        widget: "string"
-      - label: "Publish Date"
-        name: "date"
-        widget: "datetime"
-        format: "YYYY-MM-DD"
-        dateFormat: "YYYY-MM-DD"
-        timeFormat: false
-      - label: Author
-        name: "author"
-        widget: relation
-        collection: "meta"
-        file: "authors"
-        searchFields:
-          - "authors.*.name"
-        displayFields:
-          - "authors.*.name"
-        valueField: "authors.*.slug"
-      - label: Tags
-        label_singular: "Tag"
-        name: "tags"
+      - label: Name
+        name: name
+        widget: string
+      - label: Slug
+        name: slug
+        widget: string
+      - label: Content
+        name: content
+        widget: markdown
+        required: false
+
+  - name: booths
+    label: Booths
+    label_singular: Booth
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    folder: "content/booths"
+    format: yml
+    create: true
+    editor:
+      preview: false
+    fields:
+      - label: Name
+        name: name
+        widget: string
+      - label: Slug
+        name: slug
+        widget: string
+      - label: Brief Description
+        name: brief_description
+        widget: markdown
+        required: false
+      - label: Description
+        name: description
+        widget: markdown
+        required: false
+      - label: Included Items
+        name: included_items
         widget: list
-        summary: "{{fields.tag}}"
-        field:
-          label: Tag
-          name: tag
-          widget: relation
-          collection: "meta"
-          file: "tags"
-          searchFields:
-            - "tags.*.name"
-          displayFields:
-            - "tags.*.name"
-          valueField: "tags.*.slug"
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
+        fields:
+          - label: Item
+            name: content
+            widget: string
+      - label: Total Cost
+        name: total_cost
+        widget: string
+        required: false
+
+  - name: blog
+    label: Blog Posts
+    label_singular: Blog Post
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    folder: "content/blog"
+    format: yml
+    create: true
+    editor:
+      preview: false
+    fields:
+      - label: Name
+        name: name
+        widget: string
+      - label: Slug
+        name: slug
+        widget: string
+      - label: Content
+        name: content
+        widget: markdown
+        required: false
+
+  - name: misc
+    label: Other Content
+    delete: false
+    files:
+      - name: backdrops
+        label: Backdrops
+        create: true
+        editor:
+          preview: false
+        file: "content/backdrops.yml"
+        fields:
+          - label: Introduction
+            name: intro
+            widget: markdown
+            required: false
+          - label: All Backdrops
+            label_singular: Backdrop
+            name: items
+            widget: list
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Description
+                name: description
+                widget: markdown
+                required: false
+      - name: extras
+        label: Extras
+        label_singular: Extra
+        create: true
+        editor:
+          preview: false
+        file: "content/extras.yml"
+        fields:
+          - label: Introduction
+            name: intro
+            widget: markdown
+            required: false
+          - label: Items
+            label_singular: Item
+            name: items
+            widget: list
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Price
+                name: price
+                widget: string
+              - label: Description
+                name: description
+                widget: markdown
+                required: false
+      - name: faq
+        label: FAQ
+        create: true
+        editor:
+          preview: false
+        file: "content/faq.yml"
+        fields:
+          - label: Introduction
+            name: intro
+            widget: markdown
+            required: false
+          - label: Questions
+            label_singular: Questions
+            name: questions
+            widget: list
+            fields:
+              - label: Question
+                name: name
+                widget: string
+              - label: Answer
+                name: description
+                widget: markdown
+                required: false
+          - label: Feature Comparison
+            label_singular: Feature
+            name: features
+            widget: list
+            fields:
+              - label: Feature
+                name: name
+                widget: string
+              - label: Us
+                name: us
+                widget: string
+              - label: Them
+                name: them
+                widget: string
+      - name: testimonials
+        label: Testimonials
+        create: true
+        editor:
+          preview: false
+        file: "content/testimonials.yml"
+        fields:
+          - label: Introduction
+            name: intro
+            widget: markdown
+            required: false
+          - label: Items
+            label_singular: Testimonial
+            name: items
+            widget: list
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Title
+                name: title
+                widget: string
+                required: false
+              - label: Content
+                name: content
+                widget: markdown
+                required: false
+      - name: team
+        label: Team
+        label_singular: Team Member
+        create: true
+        editor:
+          preview: false
+        file: "content/team.yml"
+        fields:
+          - label: Introduction
+            name: intro
+            widget: markdown
+            required: false
+          - label: Leading Member
+            name: primary
+            widget: object
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Role
+                name: role
+                widget: string
+              - label: Description
+                name: description
+                widget: markdown
+                required: false
+          - label: Members
+            label_singular: Member
+            name: items
+            widget: list
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Role
+                name: role
+                widget: string
+              - label: Bio
+                name: bio
+                widget: markdown
+                required: false

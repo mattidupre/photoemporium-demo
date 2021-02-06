@@ -1,0 +1,28 @@
+items:
+  - name: Social Media Station
+    price: $250
+    description: Every booth is ready to send your pics to the beautysphere, but
+      this separate kiosk keeps the line moving and smiles a-happening. View
+      photos and share via email, text, or social straight from a tablet near
+      the photo booth. Instead of two booths, just add a social media station.
+  - name: Wedding Guest Book
+    description: We have gifts for our wedding clients. Every wedding gets a
+      Photobooth Guest Book and double prints for your friends to make a unique
+      momento for you. We also create a fun video slideshow of all your images
+      to get tons of likes on social. Besides the hokey pokey, that's what it is
+      all about.
+    price: $Free
+  - name: Custom Backdrops
+    price: $250
+    description: Spread your logo love all over this backdrop. Send us your logo,
+      designs, initials for a great step and repeat banner, or request something
+      extra special. We'd love to help a brother out.
+  - name: Inflatable Booth
+    price: $150
+    description: Sometimes we go against our grain and provide a little privacy in
+      the booth. But it is a really big booth that can still fit about 15
+      people. It also looks like it belongs on the moon - which is super cool.
+  - description: Thought bubbles, logo, hashtags and more. Create your own props
+      that will set your photobooth experience apart from everyone.
+    name: Custom Props
+    price: $25 each
